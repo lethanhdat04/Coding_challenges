@@ -12,7 +12,6 @@ int main(){
         if (command == "PUSH"){
             cin >> value;
             st.push(value);
-            cout << value << " ";
         } else if (command == "POP"){
             if (!st.empty()){
                 cout << st.top() << endl;
