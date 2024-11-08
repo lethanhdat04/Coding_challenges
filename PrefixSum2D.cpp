@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAX = 1005;
+const int MAX = 1006;
 int n,m,q;
 int a[MAX][MAX];
 int f[MAX][MAX];
