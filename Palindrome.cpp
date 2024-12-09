@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-int a[1000005];
+
+const int MAX_N = 1000005;
+int a[MAX_N];
 
 int main() {
 	int n, m, k;
