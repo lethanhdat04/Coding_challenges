@@ -1,44 +1,48 @@
-#include<iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-const int MAX_N = 1000005;
-const int LOG = 17;
-int a[MAX_N];
-int m[MAX_N][LOG];  // m[i][j] is minium among a[i..i+2^j-1]
+const int maxN = 1e6 + 5;
+const int LOG = 20;
+int n, m;
+int a[maxN], f[maxN][LOG];
+// f[i][j] store min in range(i, i + 2^j - 1)
 
-int query(int L, int R){
-    int length = R - L + 1;
+int query(int i, int j) {
+    int length = j - i + 1;
     int k = 0;
-    while ((1 << (k+1)) <= length){
+    while (1 << (k+1) <= length) {
         k++;
     }
-    return min(m[L][k], m[R - (1 << k) + 1][k]);
+    return min(f[i][k], f[j - (1 << k) + 1][k]);
 }
 
-int main(){
-    //input()
-    int n;
+int main() {
     cin >> n;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
-        m[i][0] = a[i];
     }
-    //Preprocessing
-    for (int j = 1; j < LOG; j++){
-        for (int i = 0; i + (1 << j) - 1 < n; i++){
-            m[i][j] = min(m[i][j-1], m[i+(1<<(j-1))][j-1]);
+
+    // initial value
+    for (int i = 0; i < n; i++) {
+        f[i][0] = a[i];
+    }
+
+    for (int j = 1; j < LOG; j++) {
+        for (int i = 0; i + (1 << j) - 1 < n; i++) {
+            f[i][j] = min(f[i][j-1], f[i + (1 << (j-1))][j-1]);
         }
     }
-    //Query
-    int q;
-    cin >> q;
+
+    int m;
+    cin >> m;
     int sum = 0;
-    for (int i = 0; i < q; i++){
-        int L, R;
-        cin >> L >> R;
-        sum += query(L, R);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        sum += query(a, b);
     }
+
     cout << sum;
-    return 0;
+
 }
