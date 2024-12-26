@@ -9,6 +9,7 @@ int appear[maxN*2] = {0};
 int d[2*maxN][2*maxN];
 int x[2*maxN];
 
+// Test github
 void inp() {
     cin >> n >> k;
     for (int i = 0; i <= 2*n; i++) {
